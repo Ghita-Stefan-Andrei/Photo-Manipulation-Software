@@ -1,5 +1,5 @@
 # Project1
-A small c++ program to apply some filters on a photo
+A small C++ program that use OpenCV  to apply some filters on a photo
 
 1 - Shows the original photo(unchanged)
 
