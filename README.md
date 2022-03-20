@@ -9,6 +9,6 @@ A small C++ program that use OpenCV  to apply some filters on a photo
 
 4 - Shows the histograms for RGB and Grayscale
 
-5 - Should apply a noise filter, but is not working
+5 - Should apply a noise filter, wip
 
 6 - Apply clahe algorithm
