@@ -1,4 +1,5 @@
-# Project1
+# Photo-Manipulation-Software
+
 A small C++ program that use OpenCV  to apply some filters on a photo
 
 1 - Shows the original photo(unchanged)
