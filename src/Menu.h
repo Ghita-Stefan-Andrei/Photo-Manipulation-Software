@@ -11,8 +11,7 @@ void AfisareMenu()
 	cout << " Pentru afisarea imaginii in alb si negru apasati 2:" << endl;
 	cout << " Pentru afisarea imaginii redimensionate apasati 3 si introduceti de cate ori vreti sa fie marita:" << endl;
 	cout << " Pentru a afisa histograme pt BGR si Greyscale apasati 4:" << endl;
-	cout << " Pentru a aplica filtru de zgomot apasati 5:" << endl;
-	cout << " Pentru a afisa clahe apasati 6:" << endl;
+	cout << " Pentru a afisa clahe apasati 5:" << endl;
 }
 
 
@@ -167,98 +166,6 @@ void _CASE_4(Mat img,Mat grey)
 	destroyAllWindows();
 }
 void _CASE_5(Mat& img)
-{ 
-	Mat b(4 + img.rows, 4 + img.cols, 0);
-	{
-		for (int i = 2; i < img.rows + 2; i++)
-		{
-			for (int j = 2; j < img.cols + 2; j++)
-			{
-				b.at<int8_t>(i, j) = img.at<int8_t>(i - 2, j - 2);
-			}
-		}
-		for (int i = 0; i < img.rows + 4; i++)
-		{
-			for (int j = 0; j < img.cols + 4; j++)
-			{
-				//skip pt elementele mat
-				if ((i >= 2 && i < img.rows + 2) || (j >= 0 && j < 2 && j >= img.cols + 2 && j < img.cols + 4))
-				{
-					continue;
-				}
-				//sus
-				if (i >= 0 && i < 2 && j >= 2 && j < img.rows + 2)
-				{
-					//mat2[i][j] = mat[0][j - WinSize / 2];
-					b.at<int8_t>(i, j) = img.at<int8_t>(0, j - 2);
-				}
-				//jos
-				if (i >= img.rows + 2 && i < img.rows + 4 && j >= 2 && j < img.cols + 2)
-				{
-					//mat2[i][j] = mat[h - 1][j - WinSize / 2];
-					b.at<int8_t>(i, j) = img.at<int8_t>(img.rows - 1, j - 2);
-				}
-			}
-		}
-		for (int i = 0; i < img.rows + 4; i++)
-		{
-			for (int j = 0; j < img.cols + 4; j++)
-			{
-				//skip pt elementele mat
-				if (j >= 2 && j < img.cols + 2)
-				{
-					continue;
-				}
-				//stanga
-				if (i >= 0 && i < img.rows + 4 && j >= 0 && j < 2)
-				{
-					//mat2[i][j] = mat2[i][WinSize / 2];
-					b.at<int8_t>(i, j) = b.at<int8_t>(i, 2);
-				}
-				//dreapta
-				if (i >= 0 && i < img.rows + 4 && j >= img.cols + 2 && j < img.cols + 4)
-				{
-					//mat2[i][j] = mat2[i][l + WinSize / 2 - 1];
-					b.at<int8_t>(i, j) = b.at<int8_t>(i, img.cols + 1);
-				}
-			}
-		}
-	}
-	imwrite("tocolor.png", b);
-	Mat c = imread("tocolor.png", IMREAD_COLOR);
-	int nr = 0;
-	imwrite("i.png", img);
-	Mat filtrat = imread("i.png",IMREAD_COLOR);
-	Mat t = filtrat;
-	int pro = (filtrat.rows * filtrat.cols) / 100;
-	int pixelcount = 0;
-	int spro = 0;
-	//imshow("Filtru_off", c);
-	//moveWindow("Filtru_off", 100, 100);
-	//waitKey(1);
-	for (int i = 0; i < img.rows; i++)
-	{
-		for (int j = 0; j < img.cols; j++)
-		{
-			filtrat.at<Vec3b>(i, j) = filtruMedian(i,j,t);
-			//pause();
-			pixelcount++;
-			if (pixelcount == pro)
-			{
-				clrscr();
-				cout << " Progres filtru: " << ++spro << "%" << endl;
-				pixelcount = 0;
-			}
-		}
-	}
-	//medianBlur(img, noise, 5);
-	namedWindow("Filtru_On", WINDOW_AUTOSIZE);
-	imshow("Filtru_On", filtrat);
-	moveWindow("Filtru_On", 105 + filtrat.cols, 100);
-	waitKey();
-	destroyAllWindows();
-}
-void _CASE_6(Mat& img)
 {
 	Mat lab_image;
 	cvtColor(img, lab_image, COLOR_BGR2Lab);
