@@ -4,7 +4,6 @@ int main()
 {
 	Mat img = imread("lena.jpg", IMREAD_COLOR);
 	Mat Grey_img = imread("lena.jpg", IMREAD_COLOR);
-	Mat noise = imread("noise.png", IMREAD_GRAYSCALE);
 	Mat clahe = imread("clahe.png");
 	while (true)
 	{
@@ -22,7 +21,7 @@ int main()
 
 			case '4':_CASE_4(img, Grey_img); break;
 
-			case '5':_CASE_6(clahe); break;
+			case '5':_CASE_5(clahe); break;
 
 			case '*':goto here; //Iese din bucla infinita
 
