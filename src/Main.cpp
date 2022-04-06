@@ -22,9 +22,7 @@ int main()
 
 			case '4':_CASE_4(img, Grey_img); break;
 
-			case '5':_CASE_5(noise); break;
-
-			case '6':_CASE_6(clahe); break;
+			case '5':_CASE_6(clahe); break;
 
 			case '*':goto here; //Iese din bucla infinita
 
